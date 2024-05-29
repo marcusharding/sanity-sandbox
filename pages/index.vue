@@ -38,7 +38,6 @@ const getContent = async () => {
   }[0]
   `
   data.value = await client.fetch(CONTENT_QUERY);
-  return content;
 }
 
 onMounted(() => { getContent(); })
