@@ -6,41 +6,32 @@
 
 <script setup>
 
-import { client } from "@/utils/sanity/client";
-
-// DATA
-const data = ref(null);
-const getContent = async () => {
-
-  const CONTENT_QUERY = `*[_type == "page"] {
-    ...,
-    sections[] {
-      _type,
-      _type == "heroBlock" => {
-        heroBlock {
-          ...
-        }
-      },
-      _type == "textBlock" => {
-        textBlock {
-          ...
-        }
-      },
-      _type == "ctaBlock" => {
-        ctaBlock {
-          ...
-        }
-      },
-      _type == "imageCarousel" => {
+const query = groq`*[_type == "page"] {
+  ...,
+  sections[] {
+    _type,
+    _type == "heroBlock" => {
+      heroBlock {
         ...
       }
+    },
+    _type == "textBlock" => {
+      textBlock {
+        ...
+      }
+    },
+    _type == "ctaBlock" => {
+      ctaBlock {
+        ...
+      }
+    },
+    _type == "imageCarousel" => {
+      ...
     }
-  }[0]
-  `
-  data.value = await client.fetch(CONTENT_QUERY);
-}
+  }
+}[0]`;
 
-onMounted(() => { getContent(); })
+const { data } = await useSanityQuery(query);
 
 </script>
 
