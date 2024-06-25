@@ -4,7 +4,7 @@ export default defineNuxtConfig({
 
   sanity: {
     globalHelper: true,
-    projectId: '3d3xmmde',
+    projectId: 'l202cs32',
     dataset: 'production',
     useCdn: true,
     ignoreBrowserTokenWarning: true,
